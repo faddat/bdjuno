@@ -33,6 +33,7 @@ func Builder(cfg *config.Config, codec *params.EncodingConfig) (db.Database, err
 		return nil, fmt.Errorf("invalid configuration database, must be PostgreSQL")
 	}
 
+	psqlDb.Sql.SetMaxOpenConns(10)
 	return &BigDipperDb{
 		Database: psqlDb,
 		Sqlx:     sqlx.NewDb(psqlDb.Sql, "postgresql"),
