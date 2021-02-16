@@ -1,0 +1,518 @@
+- table:
+    schema: public
+    name: account
+  array_relationships:
+  - name: account_balances
+    using:
+      foreign_key_constraint_on:
+        column: address
+        table:
+          schema: public
+          name: account_balance
+  - name: delegation_rewards
+    using:
+      foreign_key_constraint_on:
+        column: delegator_address
+        table:
+          schema: public
+          name: delegation_reward
+  - name: delegations
+    using:
+      foreign_key_constraint_on:
+        column: delegator_address
+        table:
+          schema: public
+          name: delegation
+  - name: proposal_deposits
+    using:
+      foreign_key_constraint_on:
+        column: depositor_address
+        table:
+          schema: public
+          name: proposal_deposit
+  - name: proposals
+    using:
+      foreign_key_constraint_on:
+        column: proposer_address
+        table:
+          schema: public
+          name: proposal
+  - name: proposal_votes
+    using:
+      foreign_key_constraint_on:
+        column: voter_address
+        table:
+          schema: public
+          name: proposal_vote
+  - name: redelegations
+    using:
+      foreign_key_constraint_on:
+        column: delegator_address
+        table:
+          schema: public
+          name: redelegation
+  - name: unbonding_delegations
+    using:
+      foreign_key_constraint_on:
+        column: delegator_address
+        table:
+          schema: public
+          name: unbonding_delegation
+  - name: validator_infos
+    using:
+      foreign_key_constraint_on:
+        column: self_delegate_address
+        table:
+          schema: public
+          name: validator_info
+- table:
+    schema: public
+    name: account_balance
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: address
+- table:
+    schema: public
+    name: average_block_time_from_genesis
+- table:
+    schema: public
+    name: average_block_time_per_day
+- table:
+    schema: public
+    name: average_block_time_per_hour
+- table:
+    schema: public
+    name: average_block_time_per_minute
+- table:
+    schema: public
+    name: block
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: proposer_address
+  array_relationships:
+  - name: delegation_rewards
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: delegation_reward
+  - name: pre_commits
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: pre_commit
+        column_mapping:
+          height: height
+  - name: slashing_params
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: slashing_params
+  - name: transactions
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: transaction
+  - name: validator_commission_amounts
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: validator_commission_amount
+  - name: validator_signing_infos
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: validator_signing_info
+  - name: validator_voting_powers
+    using:
+      foreign_key_constraint_on:
+        column: height
+        table:
+          schema: public
+          name: validator_voting_power
+- table:
+    schema: public
+    name: community_pool
+- table:
+    schema: public
+    name: consensus
+- table:
+    schema: public
+    name: delegation
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: delegator_address
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+  computed_fields:
+  - name: is_self_delegate
+    definition:
+      function:
+        schema: public
+        name: is_delegation_self_delegate
+    comment: ""
+- table:
+    schema: public
+    name: delegation_reward
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: delegator_address
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: double_sign_evidence
+  object_relationships:
+  - name: double_sign_vote
+    using:
+      foreign_key_constraint_on: vote_b_id
+  - name: doubleSignVoteByVoteAId
+    using:
+      foreign_key_constraint_on: vote_a_id
+- table:
+    schema: public
+    name: double_sign_vote
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+  array_relationships:
+  - name: double_sign_evidences
+    using:
+      foreign_key_constraint_on:
+        column: vote_a_id
+        table:
+          schema: public
+          name: double_sign_evidence
+  - name: doubleSignEvidencesByVoteBId
+    using:
+      foreign_key_constraint_on:
+        column: vote_b_id
+        table:
+          schema: public
+          name: double_sign_evidence
+- table:
+    schema: public
+    name: genesis
+- table:
+    schema: public
+    name: inflation
+- table:
+    schema: public
+    name: message
+  object_relationships:
+  - name: transaction
+    using:
+      foreign_key_constraint_on: transaction_hash
+- table:
+    schema: public
+    name: modules
+- table:
+    schema: public
+    name: pre_commit
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: proposal
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: proposer_address
+  array_relationships:
+  - name: proposal_deposits
+    using:
+      foreign_key_constraint_on:
+        column: proposal_id
+        table:
+          schema: public
+          name: proposal_deposit
+  - name: proposal_tally_results
+    using:
+      foreign_key_constraint_on:
+        column: proposal_id
+        table:
+          schema: public
+          name: proposal_tally_result
+  - name: proposal_votes
+    using:
+      foreign_key_constraint_on:
+        column: proposal_id
+        table:
+          schema: public
+          name: proposal_vote
+- table:
+    schema: public
+    name: proposal_deposit
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: depositor_address
+  - name: proposal
+    using:
+      foreign_key_constraint_on: proposal_id
+- table:
+    schema: public
+    name: proposal_tally_result
+  object_relationships:
+  - name: proposal
+    using:
+      foreign_key_constraint_on: proposal_id
+- table:
+    schema: public
+    name: proposal_vote
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: voter_address
+  - name: proposal
+    using:
+      foreign_key_constraint_on: proposal_id
+- table:
+    schema: public
+    name: redelegation
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: delegator_address
+  - name: validator
+    using:
+      foreign_key_constraint_on: src_validator_address
+  - name: validatorByDstValidatorAddress
+    using:
+      foreign_key_constraint_on: dst_validator_address
+- table:
+    schema: public
+    name: slashing_params
+  object_relationships:
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+- table:
+    schema: public
+    name: staking_params
+- table:
+    schema: public
+    name: staking_pool
+- table:
+    schema: public
+    name: supply
+- table:
+    schema: public
+    name: token_price
+- table:
+    schema: public
+    name: transaction
+  object_relationships:
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+  array_relationships:
+  - name: messagesByTransactionHash
+    using:
+      foreign_key_constraint_on:
+        column: transaction_hash
+        table:
+          schema: public
+          name: message
+- table:
+    schema: public
+    name: unbonding_delegation
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: delegator_address
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: validator
+  object_relationships:
+  - name: validator_info
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: validator_info
+        column_mapping:
+          consensus_address: consensus_address
+  array_relationships:
+  - name: blocks
+    using:
+      foreign_key_constraint_on:
+        column: proposer_address
+        table:
+          schema: public
+          name: block
+  - name: delegation_rewards
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: delegation_reward
+  - name: delegations
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: delegation
+  - name: double_sign_votes
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: double_sign_vote
+  - name: pre_commits
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: pre_commit
+  - name: redelegations
+    using:
+      foreign_key_constraint_on:
+        column: src_validator_address
+        table:
+          schema: public
+          name: redelegation
+  - name: redelegationsByDstValidatorAddress
+    using:
+      foreign_key_constraint_on:
+        column: dst_validator_address
+        table:
+          schema: public
+          name: redelegation
+  - name: unbonding_delegations
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: unbonding_delegation
+  - name: validator_commission_amounts
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: validator_commission_amount
+  - name: validator_commissions
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: validator_commission
+  - name: validator_descriptions
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: validator_description
+  - name: validator_signing_infos
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: validator_signing_info
+        column_mapping:
+          consensus_address: validator_address
+  - name: validator_statuses
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: validator_status
+  - name: validator_voting_powers
+    using:
+      foreign_key_constraint_on:
+        column: validator_address
+        table:
+          schema: public
+          name: validator_voting_power
+- table:
+    schema: public
+    name: validator_commission
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: validator_commission_amount
+  object_relationships:
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: validator_description
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: validator_info
+  object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: self_delegate_address
+  - name: validator
+    using:
+      foreign_key_constraint_on: consensus_address
+- table:
+    schema: public
+    name: validator_signing_info
+  object_relationships:
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+- table:
+    schema: public
+    name: validator_status
+  object_relationships:
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
+- table:
+    schema: public
+    name: validator_voting_power
+  object_relationships:
+  - name: block
+    using:
+      foreign_key_constraint_on: height
+  - name: validator
+    using:
+      foreign_key_constraint_on: validator_address
