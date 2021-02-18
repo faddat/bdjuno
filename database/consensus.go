@@ -19,8 +19,8 @@ func (db *BigDipperDb) SaveConsensus(event *constypes.ConsensusEvent) error {
 		return err
 	}
 
-	stmt = `INSERT INTO consensus (height, round, step) VALUES ($1, $2, $3)`
-	_, err := db.Sql.Exec(stmt, event.Height, event.Round, event.Step)
+	stmt = `INSERT INTO consensus (height, round, step, percentage) VALUES ($1, $2, $3, $4)`
+	_, err := db.Sql.Exec(stmt, event.Height, event.Round, event.Step, event.Percentage)
 	return err
 }
 

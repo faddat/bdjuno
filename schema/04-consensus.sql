@@ -6,9 +6,10 @@ CREATE TABLE genesis
 
 CREATE TABLE consensus
 (
-    height BIGINT NOT NULL,
-    round  INT    NOT NULL,
-    step   TEXT   NOT NULL
+    height     BIGINT  NOT NULL,
+    round      INT     NOT NULL,
+    step       TEXT    NOT NULL,
+    percentage DECIMAL NOT NULL
 );
 CREATE INDEX consensus_height_index ON consensus (height);
 
