@@ -3,7 +3,6 @@ package database
 import (
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-
 	"github.com/desmos-labs/juno/config"
 	"github.com/desmos-labs/juno/db"
 	"github.com/desmos-labs/juno/db/postgresql"
