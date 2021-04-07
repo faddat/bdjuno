@@ -6,7 +6,7 @@ import (
 	"github.com/go-co-op/gocron"
 	"google.golang.org/grpc"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 var _ modules.Module = &Module{}

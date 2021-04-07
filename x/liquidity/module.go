@@ -39,7 +39,7 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 

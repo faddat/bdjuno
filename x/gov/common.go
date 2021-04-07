@@ -8,8 +8,8 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/gov/types"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/gov/types"
 )
 
 // UpdateProposal return a function for time.AfterFunc() to update the proposal status on a given time

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/forbole/bdjuno/x/pricefeed/types"
+	"github.com/faddat/bdjuno/x/pricefeed/types"
 )
 
 // SaveTokensPrices allows to save the given tickers associating them to the given timestamp

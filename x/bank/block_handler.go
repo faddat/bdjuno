@@ -3,14 +3,14 @@ package bank
 import (
 	"context"
 
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/x/utils"
 
 	"github.com/rs/zerolog/log"
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // HandleBlock allows to handle a block properly

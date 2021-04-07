@@ -8,7 +8,7 @@ import (
 	"github.com/desmos-labs/juno/types"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 var _ modules.Module = &Module{}

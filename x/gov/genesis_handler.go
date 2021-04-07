@@ -9,8 +9,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/gov/types"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/gov/types"
 )
 
 func HandleGenesis(

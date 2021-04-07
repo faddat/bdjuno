@@ -9,7 +9,7 @@ import (
 	"github.com/go-co-op/gocron"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 var _ modules.Module = &Module{}

@@ -9,7 +9,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	juno "github.com/desmos-labs/juno/types"
 
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/x/utils"
 
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
@@ -17,9 +17,9 @@ import (
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/staking/common"
-	"github.com/forbole/bdjuno/x/staking/types"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/staking/common"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 // HandleBlock represents a method that is called each time a new block is created

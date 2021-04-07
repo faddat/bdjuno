@@ -13,13 +13,13 @@ import (
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	stakingtypes "github.com/forbole/bdjuno/x/staking/types"
+	stakingtypes "github.com/faddat/bdjuno/x/staking/types"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
 	jconfig "github.com/desmos-labs/juno/config"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 
 	_ "github.com/proullon/ramsql/driver"
 )

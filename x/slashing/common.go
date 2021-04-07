@@ -6,8 +6,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 
-	"github.com/forbole/bdjuno/x/slashing/types"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/x/slashing/types"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 func GetSigningInfos(height int64, client slashingtypes.QueryClient) ([]types.ValidatorSigningInfo, error) {

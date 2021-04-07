@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/lib/pq"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	bbanktypes "github.com/forbole/bdjuno/x/bank/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	bbanktypes "github.com/faddat/bdjuno/x/bank/types"
 )
 
 // SaveAccountBalances allows to store the balance for the given account associating it to the given height
@@ -80,7 +80,7 @@ func (db *BigDipperDb) GetTokenNames() ([]string, error) {
 SELECT (coin).denom FROM (
     SELECT unnest(coins) AS coin FROM supply WHERE height = (
         SELECT max(height) FROM supply
-	) 
+	)
 ) AS unnested`
 	if err := db.Sqlx.Select(&names, query); err != nil {
 		return nil, err

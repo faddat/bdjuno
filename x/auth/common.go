@@ -3,16 +3,16 @@ package auth
 import (
 	"context"
 
-	bbanktypes "github.com/forbole/bdjuno/x/bank/types"
+	bbanktypes "github.com/faddat/bdjuno/x/bank/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/x/utils"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // RefreshAccounts takes the given addresses and for each one queries the chain

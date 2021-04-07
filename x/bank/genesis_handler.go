@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 
-	bbanktypes "github.com/forbole/bdjuno/x/bank/types"
+	bbanktypes "github.com/faddat/bdjuno/x/bank/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // HandleGenesis handles the genesis state of the x/bank module in order to store the initial values

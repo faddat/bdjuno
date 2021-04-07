@@ -4,8 +4,8 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 // PeriodicConcensusOperations returns the AdditionalOperation that periodically runs fetches from

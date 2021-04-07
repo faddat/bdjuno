@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/forbole/bdjuno/x/pricefeed/types"
+	"github.com/faddat/bdjuno/x/pricefeed/types"
 )
 
 // GetCoinsList allows to fetch from the remote APIs the list of all the supported tokens

@@ -4,7 +4,7 @@ import (
 	"github.com/desmos-labs/juno/config"
 	"github.com/desmos-labs/juno/modules"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 var _ modules.Module = &Module{}

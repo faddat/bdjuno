@@ -5,8 +5,8 @@ import (
 
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	constypes "github.com/forbole/bdjuno/x/consensus/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	constypes "github.com/faddat/bdjuno/x/consensus/types"
 )
 
 func (suite *DbTestSuite) TestSaveConsensus() {
@@ -40,7 +40,7 @@ func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeMinuteAgo() {
 
 	var height int64 = 1000
 
-	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey) 
+	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey)
 	VALUES ('desmosvalcons1mxrd5cyjgpx5vfgltrdufq9wq4ynwc799ndrg8', 'cosmosvalconspub1zcjduepq7mft6gfls57a0a42d7uhx656cckhfvtrlmw744jv4q0mvlv0dypskehfk8')`)
 	suite.Require().NoError(err)
 
@@ -61,7 +61,7 @@ func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeHourAgo() {
 	suite.Require().NoError(err)
 
 	var height int64 = 1000
-	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey) 
+	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey)
 	VALUES ('desmosvalcons1mxrd5cyjgpx5vfgltrdufq9wq4ynwc799ndrg8', 'cosmosvalconspub1zcjduepq7mft6gfls57a0a42d7uhx656cckhfvtrlmw744jv4q0mvlv0dypskehfk8')`)
 	suite.Require().NoError(err)
 
@@ -83,7 +83,7 @@ func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeDayAgo() {
 
 	var height int64 = 1000
 
-	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey) 
+	_, err = suite.database.Sql.Exec(`INSERT INTO validator (consensus_address, consensus_pubkey)
 	VALUES ('desmosvalcons1mxrd5cyjgpx5vfgltrdufq9wq4ynwc799ndrg8', 'cosmosvalconspub1zcjduepq7mft6gfls57a0a42d7uhx656cckhfvtrlmw744jv4q0mvlv0dypskehfk8')`)
 	suite.Require().NoError(err)
 

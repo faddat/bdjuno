@@ -6,7 +6,7 @@ import (
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // UpdateCommunityPool fetch total amount of coins in the system from RPC and store it into database

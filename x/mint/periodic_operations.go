@@ -8,8 +8,8 @@ import (
 
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 // RegisterPeriodicOps returns the AdditionalOperation that periodically runs fetches from

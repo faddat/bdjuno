@@ -6,8 +6,8 @@ import (
 	"github.com/desmos-labs/juno/modules/messages"
 	juno "github.com/desmos-labs/juno/types"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x"
 )
 
 func main() {

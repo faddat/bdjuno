@@ -4,9 +4,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/lib/pq"
 
-	bbanktypes "github.com/forbole/bdjuno/x/bank/types"
+	bbanktypes "github.com/faddat/bdjuno/x/bank/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
 )
 
 func (suite *DbTestSuite) TestSaveAccountBalance() {

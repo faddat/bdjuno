@@ -3,11 +3,11 @@ package database_test
 import (
 	"time"
 
-	stakingtypes "github.com/forbole/bdjuno/x/staking/types"
+	stakingtypes "github.com/faddat/bdjuno/x/staking/types"
 
-	slashingtypes "github.com/forbole/bdjuno/x/slashing/types"
+	slashingtypes "github.com/faddat/bdjuno/x/slashing/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
 )
 
 func (suite *DbTestSuite) TestBigDipperDb_ValidatorSigningInfo() {

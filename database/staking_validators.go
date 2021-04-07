@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	"github.com/forbole/bdjuno/x/staking/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 // SaveValidatorData saves properly the information about the given validator.
@@ -30,7 +30,7 @@ INSERT INTO validator (consensus_address, consensus_pubkey) VALUES `
 	var validatorParams []interface{}
 
 	validatorInfoQuery := `
-INSERT INTO validator_info (consensus_address, operator_address, self_delegate_address, max_change_rate, max_rate) 
+INSERT INTO validator_info (consensus_address, operator_address, self_delegate_address, max_change_rate, max_rate)
 VALUES `
 	var validatorInfoParams []interface{}
 
@@ -94,13 +94,13 @@ func (db *BigDipperDb) GetValidatorConsensusAddress(address string) (sdk.ConsAdd
 func (db *BigDipperDb) GetValidator(valAddress string) (types.Validator, error) {
 	var result []dbtypes.ValidatorData
 	stmt := `
-SELECT validator.consensus_address, 
-       validator.consensus_pubkey, 
-       validator_info.operator_address, 
-       validator_info.max_change_rate, 
+SELECT validator.consensus_address,
+       validator.consensus_pubkey,
+       validator_info.operator_address,
+       validator_info.max_change_rate,
        validator_info.max_rate,
        validator_info.self_delegate_address
-FROM validator INNER JOIN validator_info ON validator.consensus_address=validator_info.consensus_address 
+FROM validator INNER JOIN validator_info ON validator.consensus_address=validator_info.consensus_address
 WHERE validator_info.operator_address = $1`
 
 	err := db.Sqlx.Select(&result, stmt, valAddress)
@@ -118,11 +118,11 @@ WHERE validator_info.operator_address = $1`
 // GetValidators returns all the validators that are currently stored inside the database.
 func (db *BigDipperDb) GetValidators() ([]dbtypes.ValidatorData, error) {
 	sqlStmt := `
-SELECT DISTINCT ON (validator.consensus_address) 
+SELECT DISTINCT ON (validator.consensus_address)
 	validator.consensus_address, validator.consensus_pubkey, validator_info.operator_address,
     validator_info.self_delegate_address, validator_info.max_rate,validator_info.max_change_rate
-FROM validator 
-INNER JOIN validator_info 
+FROM validator
+INNER JOIN validator_info
     ON validator.consensus_address = validator_info.consensus_address
 ORDER BY validator.consensus_address`
 
@@ -164,10 +164,10 @@ func (db *BigDipperDb) SaveValidatorDescription(description types.ValidatorDescr
 INSERT INTO validator_description (validator_address, moniker, identity, website, security_contact, details, height)
 VALUES($1, $2, $3, $4, $5, $6, $7)
 ON CONFLICT (validator_address, height) DO UPDATE
-    SET moniker = excluded.moniker, 
-        identity = excluded.identity, 
-        website = excluded.website, 
-        security_contact = excluded.security_contact, 
+    SET moniker = excluded.moniker,
+        identity = excluded.identity,
+        website = excluded.website,
+        security_contact = excluded.security_contact,
         details = excluded.details`
 
 	_, err = db.Sql.Exec(stmt,
@@ -247,10 +247,10 @@ func (db *BigDipperDb) SaveValidatorCommission(data types.ValidatorCommission) e
 
 	// Update the current value
 	stmt := `
-INSERT INTO validator_commission (validator_address, commission, min_self_delegation, height) 
+INSERT INTO validator_commission (validator_address, commission, min_self_delegation, height)
 VALUES ($1, $2, $3, $4)
-ON CONFLICT (validator_address, height) DO UPDATE 
-    SET commission = excluded.commission, 
+ON CONFLICT (validator_address, height) DO UPDATE
+    SET commission = excluded.commission,
         min_self_delegation = excluded.min_self_delegation;`
 	_, err = db.Sql.Exec(stmt, consAddr.String(), commission, minSelfDelegation, data.Height)
 	return err
@@ -327,8 +327,8 @@ func (db *BigDipperDb) SaveValidatorsStatuses(statuses []types.ValidatorStatus) 
 // saveDoubleSignVote saves the given vote inside the database, returning the row id
 func (db *BigDipperDb) saveDoubleSignVote(vote types.DoubleSignVote) (int64, error) {
 	stmt := `
-INSERT INTO double_sign_vote 
-    (type, height, round, block_id, validator_address, validator_index, signature) 
+INSERT INTO double_sign_vote
+    (type, height, round, block_id, validator_address, validator_index, signature)
 VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT DO NOTHING RETURNING id`
 
 	var id int64
@@ -351,7 +351,7 @@ func (db *BigDipperDb) SaveDoubleSignEvidence(evidence types.DoubleSignEvidence)
 	}
 
 	stmt := `
-INSERT INTO double_sign_evidence (height, vote_a_id, vote_b_id) 
+INSERT INTO double_sign_evidence (height, vote_a_id, vote_b_id)
 VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`
 	_, err = db.Sql.Exec(stmt, evidence.Height, voteA, voteB)
 	return err

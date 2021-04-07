@@ -10,14 +10,14 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/forbole/bdjuno/x/auth"
-	bgov "github.com/forbole/bdjuno/x/gov/types"
+	"github.com/faddat/bdjuno/x/auth"
+	bgov "github.com/faddat/bdjuno/x/gov/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	juno "github.com/desmos-labs/juno/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // HandleMsg allows to handle the different messages related to the staking module

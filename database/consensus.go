@@ -6,8 +6,8 @@ import (
 
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	constypes "github.com/forbole/bdjuno/x/consensus/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	constypes "github.com/faddat/bdjuno/x/consensus/types"
 )
 
 // SaveConsensus allows to properly store the given consensus event into the database.
@@ -89,7 +89,7 @@ func (db *BigDipperDb) GetBlockHeightTimeDayAgo(now time.Time) (dbtypes.BlockRow
 // SaveAverageBlockTimeGenesis save the average block time in average_block_time_from_genesis table
 func (db *BigDipperDb) SaveAverageBlockTimeGenesis(averageTime float64, height int64) error {
 	stmt := `
-INSERT INTO average_block_time_from_genesis(average_time ,height) 
+INSERT INTO average_block_time_from_genesis(average_time ,height)
 VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.average_time`
 	_, err := db.Sqlx.Exec(stmt, averageTime, height)
 	return err
@@ -98,7 +98,7 @@ VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.avera
 // SaveAverageBlockTimePerMin save the average block time in average_block_time_per_minute table
 func (db *BigDipperDb) SaveAverageBlockTimePerMin(averageTime float64, height int64) error {
 	stmt := `
-INSERT INTO average_block_time_per_minute(average_time, height) 
+INSERT INTO average_block_time_per_minute(average_time, height)
 VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.average_time`
 	_, err := db.Sqlx.Exec(stmt, averageTime, height)
 	return err
@@ -107,7 +107,7 @@ VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.avera
 // SaveAverageBlockTimePerHour save the average block time in average_block_time_per_hour table
 func (db *BigDipperDb) SaveAverageBlockTimePerHour(averageTime float64, height int64) error {
 	stmt := `
-INSERT INTO average_block_time_per_hour(average_time, height) 
+INSERT INTO average_block_time_per_hour(average_time, height)
 VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.average_time`
 	_, err := db.Sqlx.Exec(stmt, averageTime, height)
 	return err
@@ -116,7 +116,7 @@ VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.avera
 // SaveAverageBlockTimePerDay save the average block time in average_block_time_per_day table
 func (db *BigDipperDb) SaveAverageBlockTimePerDay(averageTime float64, height int64) error {
 	stmt := `
-INSERT INTO average_block_time_per_day(average_time, height) 
+INSERT INTO average_block_time_per_day(average_time, height)
 VALUES ($1, $2) ON CONFLICT (height) DO UPDATE SET average_time = excluded.average_time`
 	_, err := db.Sqlx.Exec(stmt, averageTime, height)
 	return err

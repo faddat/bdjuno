@@ -6,10 +6,10 @@ import (
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	bdistrtypes "github.com/forbole/bdjuno/x/distribution/types"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/database"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	bdistrtypes "github.com/faddat/bdjuno/x/distribution/types"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 // UpdateValidatorsCommissionAmounts updates the validators commissions amounts

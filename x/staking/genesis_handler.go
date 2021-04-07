@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	bstakingutils "github.com/forbole/bdjuno/x/staking/common"
+	bstakingutils "github.com/faddat/bdjuno/x/staking/common"
 
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
@@ -12,8 +12,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/staking/types"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 func HandleGenesis(

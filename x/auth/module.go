@@ -11,7 +11,7 @@ import (
 	"github.com/desmos-labs/juno/modules"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 var _ modules.Module = &Module{}

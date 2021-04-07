@@ -3,8 +3,8 @@ package database
 import (
 	"fmt"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	"github.com/forbole/bdjuno/x/staking/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 // SaveStakingParams allows to store the given params into the database

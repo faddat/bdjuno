@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	"github.com/forbole/bdjuno/x/staking/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 func newDecPts(value int64, prec int64) *sdk.Dec {
@@ -132,13 +132,13 @@ func (suite *DbTestSuite) TestGetValidator() {
 	suite.getAccount("cosmos184ma3twcfjqef6k95ne8w2hk80x2kah7vcwy4a")
 	// Insert test data
 	_, err := suite.database.Sql.Exec(`
-INSERT INTO validator (consensus_address, consensus_pubkey) 
-VALUES ('cosmosvalcons1qqqqrezrl53hujmpdch6d805ac75n220ku09rl', 
+INSERT INTO validator (consensus_address, consensus_pubkey)
+VALUES ('cosmosvalcons1qqqqrezrl53hujmpdch6d805ac75n220ku09rl',
         'cosmosvalconspub1zcjduepq7mft6gfls57a0a42d7uhx656cckhfvtrlmw744jv4q0mvlv0dypskehfk8')`)
 	suite.Require().NoError(err)
 
 	_, err = suite.database.Sql.Exec(`
-INSERT INTO validator_info (consensus_address, operator_address,self_delegate_address,max_change_rate,max_rate) 
+INSERT INTO validator_info (consensus_address, operator_address,self_delegate_address,max_change_rate,max_rate)
 VALUES ('cosmosvalcons1qqqqrezrl53hujmpdch6d805ac75n220ku09rl',
         'cosmosvaloper1rcp29q3hpd246n6qak7jluqep4v006cdsc2kkl',
         'cosmos184ma3twcfjqef6k95ne8w2hk80x2kah7vcwy4a','2','1')`)

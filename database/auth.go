@@ -5,7 +5,7 @@ import (
 
 	authttypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
 )
 
 // SaveAccount saves the given account information for the given block height and timestamp

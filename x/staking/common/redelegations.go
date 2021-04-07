@@ -9,9 +9,9 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/staking/types"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/staking/types"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 // UpdateValidatorsRedelegations updates the redelegations for all the validators provided

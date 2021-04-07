@@ -3,8 +3,8 @@ package database
 import (
 	"fmt"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	"github.com/forbole/bdjuno/x/staking/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	"github.com/faddat/bdjuno/x/staking/types"
 )
 
 // SaveDelegations stores inside the database the given delegations data.
@@ -156,8 +156,8 @@ INSERT INTO account (address) VALUES `
 	var accParams []interface{}
 
 	rdQry := `
-INSERT INTO redelegation 
-    (delegator_address, src_validator_address, dst_validator_address, amount, completion_time, height) 
+INSERT INTO redelegation
+    (delegator_address, src_validator_address, dst_validator_address, amount, completion_time, height)
 VALUES `
 	var rdParams []interface{}
 

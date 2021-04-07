@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/lib/pq"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	bdistrtypes "github.com/forbole/bdjuno/x/distribution/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	bdistrtypes "github.com/faddat/bdjuno/x/distribution/types"
 )
 
 // SaveCommunityPool allows to save for the given height the given total amount of coins
@@ -20,7 +20,7 @@ func (db *BigDipperDb) SaveCommunityPool(coin sdk.DecCoins, height int64) error 
 // SaveValidatorCommissionAmounts saves the given validator commission amounts for the given height
 func (db *BigDipperDb) SaveValidatorCommissionAmount(amount bdistrtypes.ValidatorCommissionAmount) error {
 	stmt := `
-INSERT INTO validator_commission_amount(validator_address, amount, height) 
+INSERT INTO validator_commission_amount(validator_address, amount, height)
 VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`
 
 	_, err := db.Sql.Exec(stmt,

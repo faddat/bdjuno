@@ -5,8 +5,8 @@ import (
 
 	"github.com/lib/pq"
 
-	dbtypes "github.com/forbole/bdjuno/database/types"
-	"github.com/forbole/bdjuno/x/gov/types"
+	dbtypes "github.com/faddat/bdjuno/database/types"
+	"github.com/faddat/bdjuno/x/gov/types"
 )
 
 // SaveProposals allows to save for the given height the given total amount of coins
@@ -18,7 +18,7 @@ func (db *BigDipperDb) SaveProposals(proposals []types.Proposal) error {
 
 	query := `
 INSERT INTO proposal(
-	title, description, proposer_address, proposal_route, proposal_type, proposal_id, status, 
+	title, description, proposer_address, proposal_route, proposal_type, proposal_id, status,
     submit_time, deposit_end_time, voting_start_time, voting_end_time
 ) VALUES`
 	var param []interface{}
@@ -48,7 +48,7 @@ INSERT INTO proposal(
 func (db *BigDipperDb) SaveProposal(proposal types.Proposal) error {
 	query := `
 INSERT INTO proposal(
-	title, description, proposer_address, proposal_route, proposal_type, proposal_id, status, 
+	title, description, proposer_address, proposal_route, proposal_type, proposal_id, status,
     submit_time, deposit_end_time, voting_start_time, voting_end_time
 ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) ON CONFLICT DO NOTHING`
 
@@ -105,7 +105,7 @@ func (db *BigDipperDb) SaveVote(vote types.Vote) error {
 // SaveDeposit allows to save for the given message deposit and height
 func (db *BigDipperDb) SaveDeposit(deposit types.Deposit) error {
 	query := `
-INSERT INTO proposal_deposit(proposal_id, depositor_address, amount, height) 
+INSERT INTO proposal_deposit(proposal_id, depositor_address, amount, height)
 VALUES ($1, $2, $3, $4) ON CONFLICT DO NOTHING`
 	_, err := db.Sql.Exec(query,
 		deposit.ProposalID,

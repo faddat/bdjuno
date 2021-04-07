@@ -5,14 +5,14 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	bstakingutils "github.com/forbole/bdjuno/x/staking/common"
+	bstakingutils "github.com/faddat/bdjuno/x/staking/common"
 
-	"github.com/forbole/bdjuno/x/staking/types"
+	"github.com/faddat/bdjuno/x/staking/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	juno "github.com/desmos-labs/juno/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // HandleMsg allows to handle the different messages related to the staking module

@@ -5,12 +5,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/forbole/bdjuno/x/auth"
+	"github.com/faddat/bdjuno/x/auth"
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/desmos-labs/juno/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 func HandleMsg(

@@ -3,14 +3,14 @@ package slashing
 import (
 	"context"
 
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/x/utils"
 
 	"github.com/rs/zerolog/log"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 
-	"github.com/forbole/bdjuno/database"
+	"github.com/faddat/bdjuno/database"
 )
 
 // HandleBlock represents a method that is called each time a new block is created

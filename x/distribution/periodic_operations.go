@@ -5,10 +5,10 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/bdjuno/x/distribution/common"
+	"github.com/faddat/bdjuno/x/distribution/common"
 
-	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/x/utils"
+	"github.com/faddat/bdjuno/database"
+	"github.com/faddat/bdjuno/x/utils"
 )
 
 // PeriodicStakingOperations returns the AdditionalOperation that periodically runs fetches from
