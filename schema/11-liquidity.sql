@@ -12,6 +12,8 @@ CREATE TABLE validator_signing_info
 CREATE INDEX validator_signing_info_validator_address_index ON validator_signing_info (validator_address);
 CREATE INDEX validator_signing_info_height_index ON validator_signing_info (height);
 
+CREATE TABLE
+
 CREATE TABLE slashing_params
 (
     signed_block_window        BIGINT  NOT NULL,
