@@ -122,7 +122,7 @@ func (coins *DbCoins) Scan(src interface{}) error {
 	return nil
 }
 
-//_______________________________________________________
+// _______________________________________________________
 
 // DbDecCoin represents the information stored inside the database about a single coin
 type DbDecCoin struct {

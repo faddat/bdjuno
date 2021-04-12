@@ -53,7 +53,7 @@ func NewProposal(
 	}
 }
 
-//MsgVote
+// MsgVote
 type TallyResult struct {
 	ProposalID uint64
 	Yes        int64
@@ -114,7 +114,7 @@ type Deposit struct {
 	Height     int64
 }
 
-//NewDeposit return a new Deposit instance
+// NewDeposit return a new Deposit instance
 func NewDeposit(
 	proposalID uint64,
 	depositor string,

@@ -27,8 +27,8 @@ type Order struct {
 }
 
 type Pool struct {
-	Id                    uint64   // index of this liquidity pool
-	TypeId                uint32   // pool type of this liquidity pool
+	ID                    uint64   // index of this liquidity pool
+	TypeID                uint32   // pool type of this liquidity pool
 	ReserveCoinDenoms     []string // list of reserve coin denoms for this liquidity pool
 	ReserveAccountAddress string   // reserve account address for this liquidity pool to store reserve coins
 	PoolCoinDenom         string   // denom of pool coin for this liquidity pool

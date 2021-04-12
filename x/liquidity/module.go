@@ -50,7 +50,7 @@ func (m *Module) RunAdditionalOperations() error {
 
 // HandleGenesis implements modules.Module
 func (m *Module) HandleGenesis(_ *tmtypes.GenesisDoc, appState map[string]json.RawMessage) error {
-	return HandleGenesis(appState, m.encodingConfig.Marshaler, m.govClient, m.db)
+	return HandleGenesis(appState, m.encodingConfig.Marshaler, m.lmClient, m.db)
 }
 
 // HandleBlock implements modules.Module
@@ -63,7 +63,9 @@ func (m *Module) HandleTx(*types.Tx) error {
 	return nil
 }
 
+/*
 // HandleMsg implements modules.Module
-func (m *Module) HandleMsg(_ int, msg sdk.Msg, tx *types.Tx) error {
-	return HandleMsg(tx, msg, m.govClient, m.authClient, m.bankClient, m.encodingConfig.Marshaler, m.db)
+func (m *Module) HandleMsg(_ int, msg sdk.Msg, tx *lmtypes.Tx) error {
+	return HandleMsg(tx, msg, m.lmClient, m.authClient, m.bankClient, m.encodingConfig.Marshaler, m.db)
 }
+*/

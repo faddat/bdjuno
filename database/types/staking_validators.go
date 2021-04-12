@@ -124,7 +124,7 @@ func (v ValidatorInfoRow) Equal(w ValidatorInfoRow) bool {
 		v.MaxChangeRate == w.MaxChangeRate
 }
 
-//________________________________________________________________
+// ________________________________________________________________
 
 // ValidatorDescriptionRow represent a row in validator_description
 type ValidatorDescriptionRow struct {

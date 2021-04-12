@@ -82,7 +82,7 @@ func NewRedelegation(
 	}
 }
 
-//DelegationShare save the self delegation ratio on that instance
+// DelegationShare save the self delegation ratio on that instance
 type DelegationShare struct {
 	ValidatorAddress string
 	DelegatorAddress string
@@ -91,7 +91,7 @@ type DelegationShare struct {
 	Timestamp        time.Time
 }
 
-//NewDelegationShare get a new instance of modify self Delegation
+// NewDelegationShare get a new instance of modify self Delegation
 func NewDelegationShare(
 	validatorAddress string, delegatorAddress string, shares float64,
 	height int64, timestamp time.Time,

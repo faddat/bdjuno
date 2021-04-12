@@ -61,7 +61,7 @@ func (v validator) GetSelfDelegateAddress() string {
 	return v.SelfDelegateAddress
 }
 
-//Equals return the equality of two validator
+// Equals return the equality of two validator
 func (v validator) Equals(w validator) bool {
 	return v.ConsensusAddr == w.ConsensusAddr &&
 		v.ConsPubKey == w.ConsPubKey &&
@@ -116,7 +116,7 @@ type ValidatorDelegations struct {
 
 //-----------------------------------------------------
 
-//ValidatorCommission allow to build a validator commission instance
+// ValidatorCommission allow to build a validator commission instance
 type ValidatorCommission struct {
 	ValAddress        string
 	Commission        *sdk.Dec
@@ -136,7 +136,7 @@ func NewValidatorCommission(
 	}
 }
 
-//Equals return the equality of two validatorCommission
+// Equals return the equality of two validatorCommission
 func (v ValidatorCommission) Equals(w ValidatorCommission) bool {
 	return v.ValAddress == w.ValAddress &&
 		v.Commission == w.Commission &&
