@@ -13,9 +13,9 @@ import (
 	"github.com/desmos-labs/juno/modules"
 	"github.com/desmos-labs/juno/types"
 	"github.com/go-co-op/gocron"
+	lmtypes "github.com/tendermint/liquidity/x/liquidity/types"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 	tmtypes "github.com/tendermint/tendermint/types"
-	lmtypes "github.com/tendermint/liquidity/x/liquidity/types"
 
 	"github.com/tendermint/liquidity/x/liquidity/client/cli"
 	"github.com/tendermint/liquidity/x/liquidity/keeper"
@@ -23,7 +23,6 @@ import (
 	"github.com/tendermint/liquidity/x/liquidity/types"
 
 	"context"
-	"encoding/json"
 	"fmt"
 	"math/rand"
 
@@ -42,26 +41,35 @@ import (
 	"github.com/faddat/bdjuno/database"
 )
 
-
-var (
-	_ module.AppModule           = AppModule{}
-	_ module.AppModuleBasic      = AppModuleBasic{}
-	_ module.AppModuleSimulation = AppModule{}
-)
-
-
-// AppModuleBasic defines the basic application module used by the liquidity module.
-type AppModuleBasic struct {
-	cdc codec.Marshaler
+// Module represent x/gov module
+type Module struct {
+	encodingConfig *params.EncodingConfig
+	govClient      govtypes.QueryClient
+	authClient     authtypes.QueryClient
+	bankClient     banktypes.QueryClient
+	db             *database.BigDipperDb
 }
 
-// Name returns the liquidity module's name.
-func (AppModuleBasic) Name() string {
-	return types.ModuleName
+// NewModule returns a new Module instance
+func NewModule(encodingConfig *params.EncodingConfig, grpcConnection *grpc.ClientConn, db *database.BigDipperDb) *Module {
+	return &Module{
+		encodingConfig: encodingConfig,
+		govClient:      govtypes.NewQueryClient(grpcConnection),
+		authClient:     authtypes.NewQueryClient(grpcConnection),
+		bankClient:     banktypes.NewQueryClient(grpcConnection),
+		db:             db,
+	}
+}
+
+var _ modules.Module = &Module{}
+
+// Name implements modules.Module (returns name)
+func (m *Module) Name() string {
+	return "liquidity"
 }
 
 // RegisterLegacyAminoCodec registers the gov module's types for the given codec.
-func (AppModuleBasic) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
+func (m *Module) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	types.RegisterLegacyAminoCodec(cdc)
 }
 
@@ -110,5 +118,3 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 	EndBlocker(ctx, am.keeper)
 	return []abci.ValidatorUpdate{}
 }
-
-
