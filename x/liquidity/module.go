@@ -2,49 +2,24 @@ package liquidity
 
 import (
 	"encoding/json"
-
 	"github.com/cosmos/cosmos-sdk/simapp/params"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"google.golang.org/grpc"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/desmos-labs/juno/modules"
 	"github.com/desmos-labs/juno/types"
-	"github.com/go-co-op/gocron"
-	lmtypes "github.com/tendermint/liquidity/x/liquidity/types"
 	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 	tmtypes "github.com/tendermint/tendermint/types"
+	"google.golang.org/grpc"
 
-	"github.com/tendermint/liquidity/x/liquidity/client/cli"
-	"github.com/tendermint/liquidity/x/liquidity/keeper"
-	"github.com/tendermint/liquidity/x/liquidity/simulation"
-	"github.com/tendermint/liquidity/x/liquidity/types"
-
-	"context"
-	"fmt"
-	"math/rand"
-
-	"github.com/cosmos/cosmos-sdk/client"
-	sdkclient "github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/codec"
-	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/types/module"
-	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	"github.com/gorilla/mux"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/spf13/cobra"
-	abci "github.com/tendermint/tendermint/abci/types"
-
+	"github.com/desmos-labs/juno/modules"
 	"github.com/faddat/bdjuno/database"
+	lmtypes "github.com/tendermint/liquidity/x/liquidity/types"
 )
 
-// Module represent x/gov module
+// Module represent x/liquidity module
 type Module struct {
 	encodingConfig *params.EncodingConfig
-	govClient      govtypes.QueryClient
+	lmClient       lmtypes.QueryClient
 	authClient     authtypes.QueryClient
 	bankClient     banktypes.QueryClient
 	db             *database.BigDipperDb
@@ -54,7 +29,7 @@ type Module struct {
 func NewModule(encodingConfig *params.EncodingConfig, grpcConnection *grpc.ClientConn, db *database.BigDipperDb) *Module {
 	return &Module{
 		encodingConfig: encodingConfig,
-		govClient:      govtypes.NewQueryClient(grpcConnection),
+		lmClient:       lmtypes.NewQueryClient(grpcConnection),
 		authClient:     authtypes.NewQueryClient(grpcConnection),
 		bankClient:     banktypes.NewQueryClient(grpcConnection),
 		db:             db,
@@ -68,53 +43,27 @@ func (m *Module) Name() string {
 	return "liquidity"
 }
 
-// RegisterLegacyAminoCodec registers the gov module's types for the given codec.
-func (m *Module) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	types.RegisterLegacyAminoCodec(cdc)
+// RunAdditionalOperations implements modules.Module
+func (m *Module) RunAdditionalOperations() error {
+	return nil
 }
 
-// RegisterInvariants registers the liquidity module invariants.
-func (am AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {
-	keeper.RegisterInvariants(ir, am.keeper)
+// HandleGenesis implements modules.Module
+func (m *Module) HandleGenesis(_ *tmtypes.GenesisDoc, appState map[string]json.RawMessage) error {
+	return HandleGenesis(appState, m.encodingConfig.Marshaler, m.govClient, m.db)
 }
 
-// Route returns the message routing key for the liquidity module.
-func (am AppModule) Route() sdk.Route {
-	return sdk.NewRoute(types.RouterKey, NewHandler(am.keeper))
+// HandleBlock implements modules.Module
+func (m *Module) HandleBlock(*tmctypes.ResultBlock, []*types.Tx, *tmctypes.ResultValidators) error {
+	return nil
 }
 
-// QuerierRoute returns the liquidity module's querier route name.
-func (AppModule) QuerierRoute() string {
-	return types.QuerierRoute
+// HandleTx implements modules.Module
+func (m *Module) HandleTx(*types.Tx) error {
+	return nil
 }
 
-// LegacyQuerierHandler returns the liquidity module sdk.Querier.
-func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
-	return keeper.NewQuerier(am.keeper, legacyQuerierCdc)
-}
-
-// InitGenesis performs genesis initialization for the liquidity module. It returns
-// no validator updates.
-func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONMarshaler, data json.RawMessage) []abci.ValidatorUpdate {
-	var genesisState types.GenesisState
-	cdc.MustUnmarshalJSON(data, &genesisState)
-	InitGenesis(ctx, am.keeper, genesisState)
-	return []abci.ValidatorUpdate{}
-}
-
-// ExportGenesis returns the exported genesis state as raw bytes for the liquidity module.
-func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONMarshaler) json.RawMessage {
-	gs := ExportGenesis(ctx, am.keeper)
-	return cdc.MustMarshalJSON(gs)
-}
-
-// BeginBlock performs a no-op.
-func (am AppModule) BeginBlock(ctx sdk.Context, _ abci.RequestBeginBlock) {
-	BeginBlocker(ctx, am.keeper)
-}
-
-// EndBlock returns the end blocker for the liquidity module. It returns no validator updates.
-func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	EndBlocker(ctx, am.keeper)
-	return []abci.ValidatorUpdate{}
+// HandleMsg implements modules.Module
+func (m *Module) HandleMsg(_ int, msg sdk.Msg, tx *types.Tx) error {
+	return HandleMsg(tx, msg, m.govClient, m.authClient, m.bankClient, m.encodingConfig.Marshaler, m.db)
 }
